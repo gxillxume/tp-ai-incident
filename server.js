@@ -8,8 +8,13 @@ app.use(express.static('frontend/pages'));
 app.use('/js', express.static('frontend/js'));
 
 // ROUTES
-// TODO: Ajouter /dashboard, /incidents
-app.use('/equipements', require('./routes/equipements')(knex)) // !! Les routes doivent retourner un Router()
+app.get('/equipements', (req, res) => {
+    res.sendFile('equipements.html', { root: './frontend/pages' });
+});
+
+
+// API
+app.use('/api/equipements', require('./routes/equipements')(knex))
 
 // ERREURS
 app.use((req,res) => {

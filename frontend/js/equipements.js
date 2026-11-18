@@ -1,1 +1,1 @@
-fetch('/equipements/api');
+fetch('/api/equipements');
