@@ -4,7 +4,7 @@ module.exports = (knex) => {
     const router = express.Router();
 
     // GET + recherche
-    router.get('/', async (req, res) => {
+    router.get('/', async (req, res, next) => {
         try {
             const q = (req.query.q || '').trim();
             let equipements = knex('equipements').select('*');
@@ -22,13 +22,17 @@ module.exports = (knex) => {
             }
             res.json(await equipements);
         } catch (err) {
-            console.error('Erreur lors de la récupération des équipements:', err);
-            res.status(500).json({ err: 'Erreur serveur' });
+            next(err)
         }
     });
     // POST
-    router.post('/', async (req,res) => {
-        const {nom, type, adresse_ip, os, localisation} = req.body;
+    router.post('/', async (req,res,next) => {
+        try {
+
+        } catch (err) {
+            const {nom, type, adresse_ip, os, localisation} = req.body;
+        }
+        
 
 
     })

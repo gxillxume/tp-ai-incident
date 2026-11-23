@@ -32,12 +32,16 @@
                 <h2 class="title">Ajouter un équipement</h2>
                 <div id="message" class="notification" hidden></div>
                 <form method="post" id="equipements-form">
+
+                    <!-- Nom -->
                     <div class="field">
                         <label class="label" for="nom">Nom:</label>
                         <div class="control">
                             <input class="input" name="nom" type="text" placeholder="Ex: PC-DEV-07" required>
                         </div>
                     </div>
+
+                    <!-- Type -->
                     <div class="field">
                         <label class="label">Type d'equipements:</label>
                         <div class="control">
@@ -54,30 +58,41 @@
                         </div>
                     </div>
 
+                    <!-- Adresse IP -->
                     <div class="field">
                         <label class="label" for="ip">Adresse IP:</label>
                         <div class="control">
                             <input class="input" id="adresse_ip" name="adresse_ip" type="text" placeholder="Ex: 192.168.1.22" required>
                         </div>
                     </div>
+
+                    <!-- OS -->
                     <div class="field">
                         <label class="label" for="os">Système d'exploitation:</label>
                         <div class="control">
-                            <input class="input" id="os" name="os" type="text" required>
-
+                            <input class="input" id="os" name="os" type="text" placeholder="Ex: Ubuntu" required>
                         </div>
                     </div>
 
+                    <!-- Localisation -->
+                    <div class="field">
+                        <label class="label" for="localisation">Localisation:</label>
+                        <div class="control">
+                            <input class="input" name="localisation" type="text" placeholder="Ex: Salle C" required>
+                        </div>
+                    </div>
 
-                    <label class="label" for="localisation">Localisation:</label>
-                    <input class="input" name="localisation" required>
-
-                    <button class="button is-success" type="submit">Ajouter</button>
+                    <!-- Actions -->
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success" type="submit">Ajouter</button>
+                        </div>
+                    </div>
                 </form>
             </div>
 
         </section>
     </main>
 
-    <script src="/js/equipements.js"></script>
+    <script src="/js/equipements/nouveau.js"></script>
 </body>
