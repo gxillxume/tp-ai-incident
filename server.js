@@ -4,22 +4,17 @@ const knex = require('knex')(require('./knexfile').development);
 const app = express();
 
 // MIDDLEWARE (fichiers statics)
-app.use(express.static('static'));
-
-
-// VIEWS (EJS)
-app.set('view engine', 'ejs')
-
+app.use(express.static('frontend/pages'));
+app.use('/js', express.static('frontend/js'));
 
 // ROUTES
-app.use('/dashboard', require('./routes/dashboard')(knex))
-app.use('/equipements', require('./routes/equipements')(knex))
-app.use('/incidents', require('./routes/incidents')(knex))
+app.get('/equipements', (req, res) => {
+    res.sendFile('equipements.html', { root: './frontend/pages' });
+});
 
-// ACCEUIL
-app.get('/', (req, res) => {
-    res.render('pages/index');
-})
+
+// API
+app.use('/api/equipements', require('./routes/equipements')(knex))
 
 // ERREURS
 app.use((req,res) => {
