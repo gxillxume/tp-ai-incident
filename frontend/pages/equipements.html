@@ -30,7 +30,11 @@
         <section class="section">
             <div class="container">
                 <h1 class="title">Équipements</h1>
-                <p class="subtitle">Liste des équipements</p>
+                <p class="subtitle">Liste des équipements
+                    <a class="button link is-success" href="./equipements-form.html">Ajouter</a>
+                </p>
+                
+                <input class="input" id="search-input" name="q" type="search" placeholder="Rechercher...">
                 <table class="table is-striped is-fullwidth">
                     <thead>
                         <tr>
@@ -43,6 +47,7 @@
                         </tr>
                     </thead>
                     <tbody id="equipements-list"></tbody>
+                    <p id="message" class="message" aria-live="polite" hidden></p>
                 </table>
             </div>
 

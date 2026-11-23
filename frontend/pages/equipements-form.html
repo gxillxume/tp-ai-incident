@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Incident Lab</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+</head>
+<body>
+
+    <header>
+        <nav class="navbar has-shadow is-fixed-top" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">AI Incident Lab</a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="/equipements">Équipements</a>
+                    <a class="navbar-item" href="/incidents">Incidents</a>
+                </div>
+                <div class="navbar-end">
+                    <!--<a class="navbar-item" href="/dashboard">Dashboard</a>-->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h2 class="title">Ajouter un équipement</h2>
+                <div id="message" class="notification" hidden></div>
+                <form method="post" id="equipements-form">
+                    <div class="field">
+                        <label class="label" for="nom">Nom:</label>
+                        <div class="control">
+                            <input class="input" name="nom" type="text" placeholder="Ex: PC-DEV-07" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Type d'equipements:</label>
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select id="type" nam="type">
+                                    <option value="">Choisissez un type</option>
+                                    <option value="serveur">Serveur</option>
+                                    <option value="poste">Poste</option>
+                                    <option value="routeur">Routeur</option>
+                                    <option value="switch">Switch</option>
+                                    <option value="nas">NAS</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="ip">Adresse IP:</label>
+                        <div class="control">
+                            <input class="input" id="adresse_ip" name="adresse_ip" type="text" placeholder="Ex: 192.168.1.22" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="os">Système d'exploitation:</label>
+                        <div class="control">
+                            <input class="input" id="os" name="os" type="text" required>
+
+                        </div>
+                    </div>
+
+
+                    <label class="label" for="localisation">Localisation:</label>
+                    <input class="input" name="localisation" required>
+
+                    <button class="button is-success" type="submit">Ajouter</button>
+                </form>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="/js/equipements.js"></script>
+</body>

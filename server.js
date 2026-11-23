@@ -7,10 +7,13 @@ const app = express();
 app.use(express.static('frontend/pages'));
 app.use('/js', express.static('frontend/js'));
 
-// ROUTES
+// PAGES
 app.get('/equipements', (req, res) => {
     res.sendFile('equipements.html', { root: './frontend/pages' });
 });
+app.get('/equipements', (req,res) => {
+    res.sendFile('equipements-form.html', { root: './frontend/pages' });
+})
 
 
 // API
