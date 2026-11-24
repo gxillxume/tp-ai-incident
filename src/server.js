@@ -1,5 +1,6 @@
 // point d'entree
-const knex = require('./db');
+const env = process.env.NODE_ENV || 'development';
+const knex = require('knex')(require('../knexfile')[env]);
 const app = require("./app")(knex);
 
 const PORT = process.env.PORT || 3000;
@@ -14,7 +15,7 @@ async function main() {
 
 main().catch((err) => { // catch erreurs de migrations
     console.error('Erreur au démarrage du serveur:', err);
-    process.exit(1);
+    process.exitCode = 1;
 })
 
 

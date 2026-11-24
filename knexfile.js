@@ -7,14 +7,14 @@ module.exports = {
   development: {
     client: 'better-sqlite3',
     connection: {
-      filename: process.env.DB_FILENAME || './src/db/dev.sqlite'
+      filename: process.env.DB_FILENAME || './db/dev.sqlite'
     },
     useNullAsDefault: true,
     migrations: {
-      directory: './src/db/migrations'
+      directory: './db/migrations'
     },
     seeds: {
-      directory: './src/db/seeds'
+      directory: './db/seeds'
     },
     pool: { // active les Foreign Keys
       afterCreate: (conn, done) => {

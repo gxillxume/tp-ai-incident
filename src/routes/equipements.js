@@ -1,40 +1,16 @@
-const express = require('express')
+const equipementsController = require('../controllers/equipementsController')
 
 module.exports = (knex) => {
-    const router = express.Router();
+    const router = require('express').Router();
+    const controller = equipementsController(knex);
 
-    // GET + recherche
-    router.get('/', async (req, res, next) => {
-        try {
-            const q = (req.query.q || '').trim();
-            let equipements = knex('equipements').select('*');
+    router.get('/', controller.list);
 
-            if (q) {
-                // WHERE [donnees] LIKE '%[valeur]%' (query builder)
-                equipements = equipements.where((builder) => { 
-                    builder
-                        .where('nom', 'like', `%${q}%`)
-                        .orWhere('type', 'like', `%${q}%`)
-                        .orWhere('adresse_ip', 'like', `%${q}%`)
-                        .orWhere('os', 'like', `%${q}%`)
-                        .orWhere('localisation', 'like', `%${q}%`);
-                });
-            }
-            res.json(await equipements);
-        } catch (err) {
-            next(err)
-        }
-    });
-    // POST
-    router.post('/', async (req,res,next) => {
-        try {
+    router.post('/', controller.create);
 
-        } catch (err) {
-            const {nom, type, adresse_ip, os, localisation} = req.body;
-        }
-        
+    router.put('/:id', controller.update);
+    
+    router.delete('/:id', controller.remove);
 
-
-    })
     return router
 }

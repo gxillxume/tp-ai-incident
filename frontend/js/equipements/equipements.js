@@ -25,8 +25,9 @@ function render(equipements) {
         equipementsListe.appendChild(tr)
     }
 }
+
 // fonction getter/load les equipements (fetch l'API) selon le query (recherche)
-async function getData(query) {
+async function load(query) {
     controller?.abort(); // annule la requete si elle existe encore
     controller = new AbortController() // creer un nv controller pour CETTE requete
     try {
@@ -51,14 +52,14 @@ async function getData(query) {
 
 }
 
-// a chaque 'input', va run getData selon la recherche
+// a chaque 'input', va run load selon la recherche
 searchBar.addEventListener('input', () => {
     clearTimeout(timer); // annule le timer si nouveau input
     message.hidden = true
     const q = searchBar.value.trim();
-    timer = setTimeout(() => getData(q), 300); // delay getData de 300ms (temps d'attente)
+    timer = setTimeout(() => load(q), 300); // delay load de 300ms (temps d'attente)
 });
 
 
-getData('') // affiche tout les equipements
+load('') // affiche tout les equipements
 

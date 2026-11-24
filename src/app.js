@@ -8,6 +8,9 @@ module.exports = (knex) => {
     app.use(express.static('frontend'));;
 
     // PAGES
+    app.get('/', (req, res) => {
+        res.sendFile('index.html', { root: './frontend/pages' });
+    });
     app.get('/equipements', (req, res) => {
         res.sendFile('equipements.html', { root: './frontend/pages' });
     });
@@ -22,7 +25,7 @@ module.exports = (knex) => {
     app.use((err, req, res, next) => {
         console.error(err);
         if (req.path.startsWith('/api')) {
-            return res.status(500).json({ error: 'Erreur interne du serveur' })
+            return res.status(err.status || 500).json({ error: err.message || 'Erreur interne du serveur' })
         }
         res.status(404).send('<h1>404 - Page non trouvée</h1>');
     })
