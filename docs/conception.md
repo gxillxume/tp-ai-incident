@@ -1,30 +1,56 @@
-## Routes :
+## Pages HTML
 
-| Méthode | URL | Rôle
+Ces routes servent les pages de l'application. Elles ne font pas partie de l'API REST.
+
+| Méthode | URL | Rôle |
 | :--- | :--- | :--- |
-| `GET` | `/equipements` | Liste les equipements + recherche | aucun |
-| `GET` | `/equipements/nouveau` | Formulaire de creation
-| `POST` | `/equipements/nouveau` | Créer un equipement
-| `GET` | `/equipements/:id/modifier` | formulaire de modification
-| `PUT` | `/equipements/:id` | Met a jours un equipement
-| `DELETE` | `/equipements/:id` | Supprimer un equipement
-| `GET` | `/incidents` | Liste des incidents + filtres() |
-| `GET` | `/incidents/nouveau` | Affiche le formulaire de création |
-| `POST` | `/incidents` | Crée un incident |
-| `GET` | `/incidents/:id` | Détail d'un incident + zone analyse IA |
-| `GET` | `/incidents/:id/modifier` | Affiche le formulaire d'édition |
-| `PUT` | `/incidents/:id` | Met à jour un incident |
-| `DELETE` | `/incidents/:id` | Supprime un incident |
-| `POST` | `/incidents/:id/analyse-technicien` | Enregistre le choix initial (catégorie + priorité + justification + contexte figé) |
-| `POST` | `/analyses-technicien/:id/analyser-ia` | Appelle l'API IA et enregistre la réponse |
-| `POST` | `/analyses-ia/:id/decision` | Enregistre la décision finale (sans écraser le choix initial) |
-| `GET` | `/incidents/:id/historique` | Affiche l'historique des analyses |
-| `GET` | `/dashboard` | Vue agrégée (stats + graphique Chart.js) |
-| `GET` | `/` | Redirection vers `/dashboard` ou Page d'acceuil (a voir) |
+| `GET` | `/` | Affiche la page d'accueil |
+| `GET` | `/equipements` | Affiche la liste des équipements |
+| `GET` | `/equipements/nouveau` | Affiche le formulaire d'équipement |
+| `GET` | `/equipements/:id/modifier` | Affiche le formulaire de modification |
 
+## API REST
+### Équipements
+
+| Méthode | URL | Rôle |
+| :--- | :--- | :--- |
+| `GET` | `/api/equipements?q=...` | Liste et recherche les équipements |
+| `GET` | `/api/equipements/:id` | Récupère un équipement |
+| `POST` | `/api/equipements` | Crée un équipement |
+| `PUT` | `/api/equipements/:id` | Remplace les données d'un équipement |
+| `DELETE` | `/api/equipements/:id` | Supprime un équipement |
+
+### Incidents
+
+| Méthode | URL | Rôle |
+| :--- | :--- | :--- |
+| `GET` | `/api/incidents?statut=...&priorite=...&categorie=...&equipementId=...` | Liste et filtre les incidents |
+| `GET` | `/api/incidents/:id` | Récupère un incident |
+| `POST` | `/api/incidents` | Crée un incident |
+| `PUT` | `/api/incidents/:id` | Met à jour un incident |
+| `DELETE` | `/api/incidents/:id` | Supprime un incident selon la règle de conservation de l'historique |
+
+### Analyses d'incident
+
+| Méthode | URL | Rôle |
+| :--- | :--- | :--- |
+| `GET` | `/api/incidents/:id/analyses` | Récupère l'historique des analyses d'un incident |
+| `POST` | `/api/incidents/:id/analyses` | Crée une analyse avec le choix initial du technicien et le contexte figé |
+| `GET` | `/api/analyses/:id` | Récupère une analyse complète |
+| `POST` | `/api/analyses/:id/suggestion-ia` | Génère et enregistre la suggestion de l'IA |
+| `PUT` | `/api/analyses/:id/decision` | Enregistre la décision finale sans modifier le choix initial |
+
+### Tableau de bord
+
+| Méthode | URL | Rôle |
+| :--- | :--- | :--- |
+| `GET` | `/api/dashboard` | Retourne les statistiques nécessaires au tableau de bord |
+
+- Les urls de l'api REST retournent que du JSON.
+- Les pages les appellent avec fetch
 
 ## Service IA :
-- **Gemini**
+- **Gemini** (ou autre gratuit)
 
 ## Grille de Prioritées :
 | Niveau | Critères | 
@@ -38,8 +64,7 @@
 ```
 tp-ai-incident/
 |
-|-- server.js 
-|-- knexfile.js # config knex (utilisée par server.js)
+|-- knexfile.js # config knex
 |-- package.json
 |-- .env
 |-- .env.example
@@ -48,33 +73,55 @@ tp-ai-incident/
 |
 |-- db/ # fichiers concernants la base de donnée
 |    |-- README.md # infos pour la bd (dev)
-|    |-- dev.sqlite # bd sqlite (generer auto)
+|    |-- dev.sqlite # bd sqlite
+|    |
 |    |-- migrations/ # structure de la table
-|    |   |-- equipements.js
+|    |   |-- 20261113181258_equipements.js
 |    |   |-- incidents.js # a ajouter
-|    |   |-- analyses_tech.js # a ajouter (plus tard)
-|    |   |-- analyses_ia.js # a ajouter (plus tard)
+|    |   |-- analyses_tech.js # a ajouter
+|    |   |-- analyses_ia.js # a ajouter
+|    | 
 |    |-- seeds/ # Données de démo
 |        |-- equipements.js
-|        |-- incidents.js # a ajouter
+|        |-- incidents.js
+|        |-- analyses.js
 |
-|-- routes/ TODO: Ajouter analyse ai et historique
-|   |-- equipements.js
-|   |-- incidents.js
-|   |-- dashboard.js
-|   
-|-- views/ # presentation (ejs)
-|   |-- layouts/ # squelette (head, navbar)
-|   |   |-- head.ejs
-|   |   |-- header.ejs
-|   |-- pages/ # utilisent tous /layouts
-|       |-- dashboard.ejs
-|       |-- equipements.ejs
-|       |-- incidents.ejs
-|       |-- index.ejs
-|
-|-- static/ # fichiers statics (img, css, js)
-|   |-- css/
+|-- src/ # serveur
+|   |-- server.js # point d'entrée
+|   |-- app.js # configuration Express
+|   |
+|   |-- routes/ # association URL / méthodes HTTP / contrôleurs
+|   |   |-- equipements.js
+|   |   |-- incidents.js # à ajouter
+|   |   |-- analyses.js # à ajouter
+|   |
+|   |-- controllers/ # logique et requetes SQLite
+|   |    |-- equipementsController.js
+|   |    |-- incidentsController.js # à ajouter
+|   |    |-- analysesController.js # à ajouter
+|   |
+|   |-- utils/ # scripts utilitaires
+|   |   |-- validate.js # valide les champs des formulaires (serveur)
+|   |
+|-- frontend/ # client
+|   |-- pages/
+|   |   |-- index.html
+|   |   |-- boilerplate.html # fichier html prêt a etre dupliquer
+|   |   |-- equipements/
+|   |   |   |-- equipements.html
+|   |   |   |-- equipements-form.html
+|   |   |
+|   |   |-- incidents/ # à ajouter
+|   |   |-- analyses/ # à ajouter
+|   |   
+|   |-- js/ # JavaScript DOM et appels fetch
+|       |-- navbar.js # toggle menu et burger
+|       |-- equipements/
+|       |   |-- equipements.js # recherche + affichage dynamique de la page et des equipements
+|       |   |-- form.js # form de creation et modification
+|       |
+|       |-- incidents/
+|       |-- analyses/
 |
 |-- docs/ # documentation
     |-- model-db.drawio.png

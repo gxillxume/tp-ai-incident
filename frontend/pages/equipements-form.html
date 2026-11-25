@@ -9,90 +9,93 @@
 </head>
 <body>
 
-    <header>
-        <nav class="navbar has-shadow is-fixed-top" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="/">AI Incident Lab</a>
+    <nav class="navbar has-shadow is-fixed-top" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">AI Incident Lab</a>
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/equipements">Équipements</a>
+                <a class="navbar-item" href="/incidents">Incidents</a>
             </div>
-            <div class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item" href="/equipements">Équipements</a>
-                    <a class="navbar-item" href="/incidents">Incidents</a>
+            <div class="navbar-end">
+                <!--<a class="navbar-item" href="/dashboard">Dashboard</a>-->
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="title">Ajouter un équipement</h2>
+            <div id="message" class="notification" hidden></div>
+            <form id="equipements-form">
+
+                <!-- Nom -->
+                <div class="field">
+                    <label class="label" for="nom">Nom:</label>
+                    <div class="control">
+                        <input class="input" name="nom" type="text" placeholder="Ex: PC-DEV-07" required>
+                    </div>
                 </div>
-                <div class="navbar-end">
-                    <!--<a class="navbar-item" href="/dashboard">Dashboard</a>-->
+
+                <!-- Type -->
+                <div class="field">
+                    <label class="label">Type d'equipements:</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select id="type" name="type" required>
+                                <option value="">Choisissez un type</option>
+                                <option value="Serveur">Serveur</option>
+                                <option value="Poste">Poste</option>
+                                <option value="Routeur">Routeur</option>
+                                <option value="Switch">Switch</option>
+                                <option value="NAS">NAS</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <section class="section">
-            <div class="container">
-                <h2 class="title">Ajouter un équipement</h2>
-                <div id="message" class="notification" hidden></div>
-                <form id="equipements-form">
-
-                    <!-- Nom -->
-                    <div class="field">
-                        <label class="label" for="nom">Nom:</label>
-                        <div class="control">
-                            <input class="input" name="nom" type="text" placeholder="Ex: PC-DEV-07" required>
-                        </div>
+                <!-- Adresse IP -->
+                <div class="field">
+                    <label class="label" for="ip">Adresse IP:</label>
+                    <div class="control">
+                        <input class="input" id="adresse_ip" name="adresse_ip" type="text" placeholder="Ex: 192.168.1.22" required>
                     </div>
+                </div>
 
-                    <!-- Type -->
-                    <div class="field">
-                        <label class="label">Type d'equipements:</label>
-                        <div class="control">
-                            <div class="select is-fullwidth">
-                                <select id="type" name="type" required>
-                                    <option value="">Choisissez un type</option>
-                                    <option value="Serveur">Serveur</option>
-                                    <option value="Poste">Poste</option>
-                                    <option value="Routeur">Routeur</option>
-                                    <option value="Switch">Switch</option>
-                                    <option value="NAS">NAS</option>
-                                </select>
-                            </div>
-                        </div>
+                <!-- OS -->
+                <div class="field">
+                    <label class="label" for="os">Système d'exploitation:</label>
+                    <div class="control">
+                        <input class="input" id="os" name="os" type="text" placeholder="Ex: Ubuntu" required>
                     </div>
+                </div>
 
-                    <!-- Adresse IP -->
-                    <div class="field">
-                        <label class="label" for="ip">Adresse IP:</label>
-                        <div class="control">
-                            <input class="input" id="adresse_ip" name="adresse_ip" type="text" placeholder="Ex: 192.168.1.22" required>
-                        </div>
+                <!-- Localisation -->
+                <div class="field">
+                    <label class="label" for="localisation">Localisation:</label>
+                    <div class="control">
+                        <input class="input" name="localisation" type="text" placeholder="Ex: Salle C" required>
                     </div>
+                </div>
 
-                    <!-- OS -->
-                    <div class="field">
-                        <label class="label" for="os">Système d'exploitation:</label>
-                        <div class="control">
-                            <input class="input" id="os" name="os" type="text" placeholder="Ex: Ubuntu" required>
-                        </div>
+                <!-- Actions -->
+                <div class="field">
+                    <div class="control">
+                        <button id="submit-btn" class="button is-success" type="submit">Ajouter</button>
+                        <button id="delete-btn" class="button is-danger" type="button" hidden>Supprimer</button>
                     </div>
-
-                    <!-- Localisation -->
-                    <div class="field">
-                        <label class="label" for="localisation">Localisation:</label>
-                        <div class="control">
-                            <input class="input" name="localisation" type="text" placeholder="Ex: Salle C" required>
-                        </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="field">
-                        <div class="control">
-                            <button class="button is-success" type="submit">Ajouter</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </section>
-    </main>
-
-    <script src="/js/equipements/nouveau.js"></script>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <script src="/js/navbar.js"></script>
+    <script src="/js/equipements/form.js"></script>
 </body>

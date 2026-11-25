@@ -8,50 +8,36 @@
 
 </head>
 <body>
-    <header>
-        <nav class="navbar has-shadow is-fixed-top" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="/">AI Incident Lab</a>
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
+    <nav class="navbar has-shadow is-fixed-top" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">AI Incident Lab</a>
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/equipements">Équipements</a>
+                <a class="navbar-item" href="/incidents">Incidents</a>
             </div>
-            <div id="navbar-menu" class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item" href="/equipements">Équipements</a>
-                    <a class="navbar-item" href="/incidents">Incidents</a>
-                </div>
-                <div class="navbar-end">
-                    <!--<a class="navbar-item" href="/dashboard">Dashboard</a>-->
-                </div>
+            <div class="navbar-end">
+                <!--<a class="navbar-item" href="/dashboard">Dashboard</a>-->
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <main>
-        <section class="section">
-            <div class="container">
-                <h1 class="title">AI Incident Lab</h1>
-                <p class="subtitle">Bienvenue !</p>
-               
-                <a class="button is-light" href="/equipements">Voir les équipements</a>
-            </div>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">AI Incident Lab</h1>
+            <p class="subtitle">Bienvenue !</p>
+            
+            <a class="button is-light" href="/equipements">Voir les équipements</a>
+        </div>
+    </section>
 
-        </section>
-    </main>
-
-    <script>
-        const navbarBurger = document.querySelector(".navbar-burger");
-        const navbarMenu = document.querySelector(`#${navbarBurger.dataset.target}`);
-
-        navbarBurger.addEventListener("click", () => {
-            navbarBurger.classList.toggle("is-active");
-            navbarMenu.classList.toggle("is-active");
-            navbarBurger.setAttribute("aria-expanded", navbarBurger.classList.contains("is-active"));
-        });
-    </script>
+    <script src="/js/navbar.js"></script>
 </body>
 </html>

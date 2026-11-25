@@ -8,52 +8,54 @@
 
 </head>
 <body>
-
-    <header>
-        <nav class="navbar has-shadow is-fixed-top" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="/">AI Incident Lab</a>
+    <nav class="navbar has-shadow is-fixed-top" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">AI Incident Lab</a>
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/equipements">Équipements</a>
+                <a class="navbar-item" href="/incidents">Incidents</a>
             </div>
-            <div class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item" href="/equipements">Équipements</a>
-                    <a class="navbar-item" href="/incidents">Incidents</a>
-                </div>
-                <div class="navbar-end">
-                    <!--<a class="navbar-item" href="/dashboard">Dashboard</a>-->
-                </div>
+            <div class="navbar-end">
+                <!--<a class="navbar-item" href="/dashboard">Dashboard</a>-->
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <main>
-        <section class="section">
-            <div class="container">
-                <h1 class="title">Équipements</h1>
-                <p class="subtitle">Liste des équipements
-                    <a class="button link is-success" href="./equipements/nouveau">Ajouter</a>
-                </p>
-                
-                <input class="input" id="search-input" name="q" type="search" placeholder="Rechercher...">
-                <table class="table is-striped is-fullwidth">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nom</th>
-                            <th>Type</th>
-                            <th>Adresse IP</th>
-                            <th>OS</th>
-                            <th>Localisation</th>
-                        </tr>
-                    </thead>
-                    <tbody id="equipements-list"></tbody>
-                    <p id="message" class="message" aria-live="polite" hidden></p>
-                </table>
-            </div>
-
-        </section>
-    </main>
-
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Équipements</h1>
+            <p class="subtitle">Liste des équipements
+                <a class="button link is-success" href="./equipements/nouveau">Ajouter</a>
+            </p>
+            
+            <input class="input" id="search-input" name="q" type="search" placeholder="Rechercher...">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Adresse IP</th>
+                        <th>OS</th>
+                        <th>Localisation</th>
+                        <th></th> <!-- pour les actions -->
+                    </tr>
+                </thead>
+                <tbody id="equipements-list"></tbody>
+                <p id="message" class="message" aria-live="polite" hidden></p>
+            </table>
+        </div>
+    </section>
+    
+    <script src="/js/navbar.js"></script>
     <script src="/js/equipements/equipements.js"></script>
 </body>
 </html>

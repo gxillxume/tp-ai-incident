@@ -12,12 +12,16 @@ npm install
 npx knex migrate:latest
 ```
 ```bash
-# Créer les données de test
+# Réinitialiser et créer les données de test
 npx knex seed:run
 ```
+
+La seed doit être exécutée manuellement. Elle réinitialise les équipements existants.
 
 ## Démarrer (dev) :
 ```bash
 npm run dev 
 ```
+
+
 
